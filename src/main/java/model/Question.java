@@ -10,12 +10,22 @@ public class Question {
     private User user;
     private Date date;
     private List<QuestionTag> tags;
+    private List<Answer> answers;
 
-    public Question(long id, String text, User user, Date date) {
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
+    public Question(long id, String text, User user, Date date, List<Answer> answers) {
         this.id = id;
         this.text = text;
         this.user = user;
         this.date = date;
+        this.answers=answers;
     }
 
     public long getId() {
