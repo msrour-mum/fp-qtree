@@ -1,6 +1,7 @@
 package App;
 
 import model.Question;
+import model.Tag;
 import model.User;
 
 import java.util.List;
@@ -10,9 +11,20 @@ public class Qtree {
     private List<User> users;
     private List<Question> questions;
 
-    public Qtree(List<User> users, List<Question> questions) {
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    private List<Tag> tags;
+
+    public Qtree(List<User> users, List<Question> questions, List<Tag> tags) {
         this.users = users;
         this.questions = questions;
+        this.tags=tags;
     }
 
     public List<User> getUsers() {
