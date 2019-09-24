@@ -12,6 +12,16 @@ public class Question {
     private List<QuestionTag> tags;
     private List<Answer> answers;
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    private List<Comment> comments;
+
     public List<Answer> getAnswers() {
         return answers;
     }
