@@ -68,11 +68,11 @@ public class UserStatistics {
                         .collect(Collectors.toList());
 
     /*
-   Get top N users reputation who has the question that have at least 3 answers that has the up votes more than down votes by 1.6 times
+   Get top N users reputation who has the question that have at least 3 answers or one verified answer
    */
     public static BiFunction<Qtree,Integer,List<User>> getTopKUsersReputationBasedOnQuestionAndAnswers =
             (app, k)-> app.getQuestions().stream()
-                    .filter(q -> q.getAnswers().size() >= 3)
+                    .filter(q -> q.getAnswers().size() >= 3 || q.getAnswers().stream().anyMatch(a-> a.isVerified()))
                     .collect(Collectors.groupingBy(Question::getUser, Collectors.counting()))
                     .entrySet().stream().sorted((g1, g2) -> g2.getValue().intValue() - g1.getValue().intValue()).limit(k)
                     .map(Map.Entry::getKey)
