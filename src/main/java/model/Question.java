@@ -23,6 +23,8 @@ public class Question {
     private List<QuestionViews> views;
 
 
+
+
     public List<Comment> getComments() {
         return comments;
     }
