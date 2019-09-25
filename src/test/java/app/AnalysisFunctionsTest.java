@@ -37,14 +37,12 @@ class AnalysisFunctionsTest {
 
         List<Question> input= data.getQuestions();
         Date from= new GregorianCalendar(2007, 1, 1).getTime();
-        Date to= new GregorianCalendar(2010, 1, 1).getTime();
+        Date to= new GregorianCalendar(2009, 1, 1).getTime();
 
-        List<Tag> output=new AnalysisFunctions().getKTrendingTags(input,from,to,2);
+        List<String> output=new AnalysisFunctions().getKTrendingTags(input,from,to,1);
 
-        List<Tag> expectedResult= new ArrayList<>();
-        expectedResult.add(reader.GetTag(1));
-        expectedResult.add(reader.GetTag(9));
-
+        List<String> expectedResult= new ArrayList<>();
+        expectedResult.add(reader.GetTag(7).getName());
 
         Assert.assertEquals(expectedResult,output);
     }
@@ -56,11 +54,12 @@ class AnalysisFunctionsTest {
 
         List<Question> input= data.getQuestions();
 
-        List<Answer> output=new AnalysisFunctions().getKFakeAnswers(input,3);
+        List<String> output=new AnalysisFunctions().getKFakeAnswers(input,3);
 
-        List<Answer> expectedResult= new ArrayList<>();
-        expectedResult.add(reader.GetAnswer(28));
-        expectedResult.add(reader.GetAnswer(74));
+        List<String> expectedResult= new ArrayList<>();
+        expectedResult.add("Senate inquiry, interviews, first dates");
+        expectedResult.add("YouTube channel");
+        expectedResult.add("lol how you don't know that?");
 
         Assert.assertEquals(expectedResult,output);
     }

@@ -40,8 +40,8 @@ public class Main {
         System.out.println();
         System.out.print("1-top active user\n2-top Reputated user \n3-most answering user \n4-top user has question "+
                 "\n5-calculate reputation by answers \n6-calculate reputation by ques&answers \n7-top commented Answer "+
-                "\n8-top commented questions \n9- num of Question by tag &date \n10- top k viewed question \n11- tag analysis "+
-                "\n12- trending k tag \n13- top Fake answer \n14- top active user \n15- top rated answers \n16- top user comments ");
+                "\n8-top commented questions \n9- num of Question by tag &date \n10- Top k viewed question \n11- Trending k tag "+
+                "\n12- Top Fake answer \n14- top active user \n15- top rated answers \n16- top user comments ");
         System.out.println('\n');
         System.out.println("choice : ");
         Scanner sc = new Scanner(System.in);
@@ -142,11 +142,10 @@ public class Main {
 
                 List<Question> input= qtree.getQuestions();
                 AnalysisFunctions analysisFunctions=new AnalysisFunctions();
-                List<Tag> result= analysisFunctions.getKTrendingTags(input,dateFrom,dateTo,k);
+                List<String> result= analysisFunctions.getKTrendingTags(input,dateFrom,dateTo,k);
                 System.out.println("Function Result");
-                //System.out.println("Top viewed questions: "+result);
-                for (Tag t:result
-                ) {System.out.println("Tag: "+t.getName());
+                for (String t:result
+                ) {System.out.println("Tag: "+t);
                 }
                 break;
             }
@@ -158,14 +157,13 @@ public class Main {
 
                 List<Question> input= qtree.getQuestions();
                 AnalysisFunctions analysisFunctions=new AnalysisFunctions();
-                List<Answer> result= analysisFunctions.getKFakeAnswers(input,k);
+                List<String> result= analysisFunctions.getKFakeAnswers(input,k);
                 System.out.println("Function Result");
                 //System.out.println("Top viewed questions: "+result);
-                for (Answer a:result
-                ) {System.out.println("Answer: "+a.getText());
+                for (String a:result
+                ) {System.out.println("Answer: "+a);
                 }
                 break;
-                //top Fake answer
             }
             case 13: {
                 System.out.println("method 13");

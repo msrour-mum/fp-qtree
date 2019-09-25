@@ -20,29 +20,31 @@ public class AnalysisFunctions {
         result = getKViewedQuest.apply(questions, k);
         return result;
     }
-    public List<Tag> getKTrendingTags(List<Question> questions, Date from, Date to, Integer K) {
-        List<Tag> result = null;
-        FunctionX4<List<Question>, Date, Date, Integer, List<Tag>> getKTrendingTags =
+    public List<String> getKTrendingTags(List<Question> questions, Date from, Date to, Integer K) {
+        List<String> result = null;
+        FunctionX4<List<Question>, Date, Date, Integer, List<String>> getKTrendingTags =
                 (q, df, dt, n) -> q.stream()
                         .filter((question) -> question.getDate().compareTo(df) >0 && question.getDate().compareTo(dt) < 0)
                         .flatMap((qt) -> qt.getTags().stream())
-                        .collect(Collectors.groupingBy(QuestionTag::getTag))
+                        .collect(Collectors.groupingBy(QuestionTag::getTag, Collectors.counting()))
                         .entrySet()
                         .stream()
                         .map(tagListEntry -> (Tag) tagListEntry.getKey())
                         .limit(n)
+                        .map(tag -> tag.getName())
                         .collect(Collectors.toList());
         result = getKTrendingTags.apply(questions, from, to, K);
         return result;
     }
-    public List<Answer> getKFakeAnswers(List<Question> questions, Integer topCount)
+    public List<String> getKFakeAnswers(List<Question> questions, Integer topCount)
     {
-        List<Answer> result=null;
-        BiFunction<List<Question>, Integer, List<Answer>> getTopFakedAnswers =
+        List<String> result=null;
+        BiFunction<List<Question>, Integer, List<String>> getTopFakedAnswers =
                 (q, n) -> q.stream()
                         .flatMap(question -> question.getAnswers().stream())
                         .filter(answer -> isFakeAnswer(answer))
                         .limit(n)
+                        .map(answer -> answer.getText())
                         .collect(Collectors.toList());
         result = getTopFakedAnswers.apply(questions,topCount);
         return result;
