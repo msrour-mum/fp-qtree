@@ -1,7 +1,4 @@
-import App.AnalysisFunctions;
-import App.FileTestDataReader;
-import App.Qtree;
-import App.UserStatistics;
+import App.*;
 import model.*;
 import model.Question;
 import model.QuestionTag;
@@ -25,6 +22,7 @@ import java.util.stream.Collectors;
 public class Main {
 
     private static Qtree qtree=null;
+    private  static FileTestDataReader reader=null;
     public static void main(String[] args) throws IOException, ParseException {
         FileTestDataReader reader=new FileTestDataReader();
         qtree= reader.Read();
@@ -53,9 +51,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         switch (quetionNum){
             case 1 :{
-                System.out.println("Function: top active user");
+                System.out.println("Function: top active K users");
+                System.out.println("please enter number of needed active user");
+                int k = sc.nextInt();
+
                 UserStatistics st=new UserStatistics();
-                System.out.println(st.topActiveUser.apply(qtree));
+                System.out.println(st.topActiveKUser.apply(qtree,k));
                // System.out.println(st.);
                 break;
             }
@@ -100,14 +101,45 @@ public class Main {
             }
             case 7: {
                 System.out.println("method 7");
+                System.out.println("Function : Top Answer has Comments");
+                TopComments Tc=new TopComments();
+                Optional<Answer> topComAnswer=Tc.topCommentedAnswer.apply(qtree.getQuestions());
+                System.out.println("Function Result");
+                System.out.println("Top Commented Answer: "+topComAnswer.get().getText());
                 break;
             }
             case 8: {
                 System.out.println("method 8");
+                System.out.println("Function : Top Question has Comments");
+                TopComments Tc=new TopComments();
+                Optional<Question> topComQuestion=Tc.TopCommentedQuestion.apply(qtree.getQuestions());
+                System.out.println("Function Result");
+                System.out.println("Top Commented Question: "+topComQuestion.get().getText());
                 break;
             }
             case 9: {
                 System.out.println("method 9");
+                System.out.println("Function : Num of Question by tag & date");
+                System.out.println("Enter tag ");
+                String t= sc.nextLine();
+                Tag tag=reader.GetTag(t);
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                System.out.println("Enter date and time in the format yyyy-MM-dd");
+                System.out.println("For example, it is now " + format.format(new Date()));
+                Date date = null;
+                while (date == null) {
+                    String line = sc.nextLine();
+                    try {
+                        date = format.parse(line);
+                    } catch (ParseException e) {
+                        System.out.println("Sorry, that's not valid. Please try again.");
+                    }
+                }
+
+                TopComments Tc=new TopComments();
+                Long count = Tc.getQuestionCountByTagAndDate.apply(qtree.getQuestions(),tag,date);
+                System.out.println("Function Result");
+                System.out.println("Count of Question: "+ count);
                 break;
             }
             case 10: {
