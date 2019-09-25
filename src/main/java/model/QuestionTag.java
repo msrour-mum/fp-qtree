@@ -25,4 +25,11 @@ public class QuestionTag {
     public void setTag(Tag tag) {
         this.tag = tag;
     }
+
+    @Override
+    public String toString() {
+
+        return "QuestionTag: {QuestionId:"+getQuestion().getId()+"-Tag:"+getTag()+"}";
+        //return super.toString();
+    }
 }

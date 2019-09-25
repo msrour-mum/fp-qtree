@@ -88,4 +88,11 @@ public class Question {
         if (views==null) return 0;
         return views.size();
     }
+
+    @Override
+    public String toString() {
+
+        return "Question: {Id:"+getId()+"-Text:"+getText()+"-User:"+getUser()+"-Date:"+getDate()+"}";
+        //return super.toString();
+    }
 }

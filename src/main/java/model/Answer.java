@@ -84,4 +84,11 @@ public class Answer {
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
     }
+
+    @Override
+    public String toString() {
+
+        return "Answer: {Id:"+getId()+"-Text:"+getText()+"-User:"+getUser()+"-Date:"+getDate()+"}";
+        //return super.toString();
+    }
 }

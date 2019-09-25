@@ -48,4 +48,11 @@ public class Comment {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+
+        return "Comment: {Id:"+getId()+"-Text:"+getText()+"-User:"+getUser()+"-Date:"+getDate()+"}";
+        //return super.toString();
+    }
 }

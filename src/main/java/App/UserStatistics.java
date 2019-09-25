@@ -1,7 +1,9 @@
 package App;
 
+import FuncInterface.FunctionX3;
 import model.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -124,6 +126,14 @@ public class UserStatistics {
             sorted((user1,user2)->(int) (totalUserReputation.apply(q,user2) -totalUserReputation.apply(q,user1))).limit(k)
             .collect(Collectors.toList());
 
+
+
+
+
+
+
+
+
     //top user comments
     public BiFunction<Qtree,Integer, List<User>> topUserComments = (q,k)->q.getQuestions().stream()
             .flatMap(a->a.getAnswers().stream())
@@ -142,6 +152,14 @@ public class UserStatistics {
             .sorted((a1,a2)->a2.getVotes().size()-a1.getVotes().size())
             .limit(k)
             .collect(Collectors.toList());
+
+
+    //Zain :top answered Questions
+    public BiFunction<Qtree,Integer,List<Question>> topAnsweredQuestions = (q,k)->q.getQuestions().stream()
+            .sorted((a1,a2)->a2.getAnswers().size()-a1.getAnswers().size())
+            .limit(k)
+            .collect(Collectors.toList());
+
 
   /*  BiFunction<Qtree,Integer,List<Answer>> topRatedAnswers = (q,k)->q.getQuestions().stream()
             .flatMap(a->a.getAnswers().stream())
@@ -175,4 +193,6 @@ public class UserStatistics {
             .stream()
             .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
             .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
+
+
 }
