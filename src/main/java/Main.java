@@ -39,7 +39,7 @@ public class Main {
         System.out.print("1-top active user\n2-top Reputated user \n3-most answering user \n4-top user has question "+
                 "\n5-calculate reputation by answers \n6-calculate reputation by ques&answers \n7-top commented Answer "+
                 "\n8-top commented questions \n9- num of Question by tag &date \n10- Top k viewed question \n11- Trending k tag "+
-                "\n12- Top Fake answer \n14- top Answered Questions \n15- top rated answers \n16- top user comments ");
+                "\n12- Top Disliked answers \n14- top Answered Questions \n15- top rated answers \n16- top user comments ");
         System.out.println('\n');
         System.out.println("choice : ");
         Scanner sc = new Scanner(System.in);
@@ -183,13 +183,13 @@ public class Main {
             }
             case 12: {
                 System.out.println("method 12");
-                System.out.println("Function : Top Fake answer");
+                System.out.println("Function : Top Disliked answers");
                 System.out.println("Enter K value");
                 int k= sc.nextInt();
 
                 List<Question> input= qtree.getQuestions();
                 AnalysisFunctions analysisFunctions=new AnalysisFunctions();
-                List<String> result= analysisFunctions.getKFakeAnswers(input,k);
+                List<String> result= analysisFunctions.getKMostDislikedAnswers(input,k);
                 System.out.println("Function Result");
                 //System.out.println("Top viewed questions: "+result);
                 for (String a:result

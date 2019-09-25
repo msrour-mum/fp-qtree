@@ -38,7 +38,7 @@ public class AnalysisFunctions {
         result = getKTrendingTags.apply(questions, from, to, K);
         return result;
     }
-    public List<String> getKFakeAnswers(List<Question> questions, Integer topCount)
+    public List<String> getKMostDislikedAnswers(List<Question> questions, Integer topCount)
     {
         List<String> result=null;
         BiFunction<List<Question>, Integer, List<String>> getTopFakedAnswers =

@@ -58,13 +58,13 @@ class AnalysisFunctionsTest {
     }
 
     @Test
-    void getKFakeAnswers() throws IOException {
+    void getKMostDislikedAnswers() throws IOException {
         FileTestDataReader reader=new FileTestDataReader();
         Qtree data= reader.Read();
 
         List<Question> input= data.getQuestions();
 
-        List<String> output=analysisFunctions.getKFakeAnswers(input,3);
+        List<String> output=analysisFunctions.getKMostDislikedAnswers(input,3);
 
         List<String> expectedResult= new ArrayList<>();
         expectedResult.add("Senate inquiry, interviews, first dates");
