@@ -87,7 +87,7 @@ public class FileTestDataReader
 
     private List<User> users;
     private  List<Tag> tags;
-
+    private List<Question> questions = null;
 
 
     public  Qtree Read() throws IOException {
@@ -97,7 +97,7 @@ public class FileTestDataReader
         Comment currentComm=null;
         int id = 0;
         String fileName="";
-        List<Question> questions = new ArrayList<>();
+        questions = new ArrayList<>();
         String cwd = System.getProperty("user.dir");
         List<Path> fileNames =  Files.walk(Paths.get(cwd+ "/src/main/java/TestData"))
                 .filter(x->String.valueOf(x).endsWith(".txt"))
@@ -200,6 +200,13 @@ public class FileTestDataReader
     private  Tag GetTag(int id)
     {
         List<Tag>  list= tags.stream().filter(u->u.getId()==id).collect(Collectors.toList());
+        return list.get(0);
+    }
+
+
+    private  Question GetQuestion(int id)
+    {
+        List<Question>  list= questions.stream().filter(u->u.getId()==id).collect(Collectors.toList());
         return list.get(0);
     }
 }
