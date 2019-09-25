@@ -23,6 +23,16 @@ public class Question {
     private List<QuestionViews> views;
 
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    private List<Comment> comments;
+
     public List<Answer> getAnswers() {
         return answers;
     }
@@ -31,12 +41,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public Question(long id, String text, User user, Date date, List<Answer> answers) {
+    public Question(long id, String text, User user, Date date) {
         this.id = id;
         this.text = text;
         this.user = user;
         this.date = date;
-        this.answers=answers;
     }
 
     public long getId() {
