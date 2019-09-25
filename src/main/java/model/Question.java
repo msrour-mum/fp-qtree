@@ -23,9 +23,6 @@ public class Question {
 
     private List<QuestionViews> views;
 
-
-
-
     public List<Comment> getComments() {
         return comments;
     }
@@ -94,5 +91,11 @@ public class Question {
 
     public void setTags(List<QuestionTag> tags) {
         this.tags = tags;
+    }
+
+
+    public int getViewNo() {
+        if (views==null) return 0;
+        return views.size();
     }
 }
