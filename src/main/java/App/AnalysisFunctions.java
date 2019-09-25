@@ -24,7 +24,7 @@ public class AnalysisFunctions {
         List<Tag> result = null;
         FunctionX4<List<Question>, Date, Date, Integer, List<Tag>> getKTrendingTags =
                 (q, df, dt, n) -> q.stream()
-                        .filter((question) -> question.getDate().compareTo(df) <= 0 && question.getDate().compareTo(dt) >= 0)
+                        .filter((question) -> question.getDate().compareTo(df) >0 && question.getDate().compareTo(dt) < 0)
                         .flatMap((qt) -> qt.getTags().stream())
                         .collect(Collectors.groupingBy(QuestionTag::getTag))
                         .entrySet()
