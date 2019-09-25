@@ -12,6 +12,17 @@ public class Question {
     private List<QuestionTag> tags;
     private List<Answer> answers;
 
+    public List<QuestionViews> getViews() {
+        return views;
+    }
+
+    public void setViews(List<QuestionViews> views) {
+        this.views = views;
+    }
+
+    private List<QuestionViews> views;
+
+
     public List<Answer> getAnswers() {
         return answers;
     }
