@@ -3,17 +3,24 @@ package model;
 import java.util.Date;
 
 public class Vote {
-
+    private long id;
     private User user;
     private Date date;
     private boolean isLike;
 
-    public Vote(User user, Date date, boolean isLike) {
+    public Vote(long id, User user, Date date, boolean isLike) {
+        this.id = id;
         this.user = user;
         this.date = date;
         this.isLike = isLike;
     }
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
     public User getUser() {
         return user;
     }
