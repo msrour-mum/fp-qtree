@@ -1,4 +1,4 @@
-Q:1|2019-07-01 14:45:30|500|Obtain column data from One-To-Many join relation in Spring data JPA
+Q:8|2019-07-01 14:45:30|500|Obtain column data from One-To-Many join relation in Spring data JPA
 T:1,8
 A:10|2019-07-02 08:30:01|0|Journalists love it, Writers love it
 V:3,0|5,1|1,1|2,0|6,1|7,1
@@ -10,7 +10,7 @@ C:2|2019-07-04 14:30:01|let me point out that Q
 C:2|2019-07-04 14:32:01|you get the right answers, and thus
 A:1|2019-07-05 14:30:01|0|Senate inquiry, interviews, first dates
 A:4|2019-07-06 14:30:01|0|There is a YouTube channel regarding this
-Q:1|2019-07-02 14:45:30|180|How to clear a canvas in netbeans?
+Q:8|2019-07-02 14:45:30|180|How to clear a canvas in netbeans?
 T:1,8,3
 A:7|2019-07-03 08:30:01|0|I am making a small polygon generator with java swing and opengl, the program consists of having several buttons
 V:3,0|5,1|1,0|2,0|6,1|1,1

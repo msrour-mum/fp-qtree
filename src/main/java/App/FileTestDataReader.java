@@ -192,12 +192,12 @@ public class FileTestDataReader
         return  qtree;
     }
 
-    private  User GetUser(int id)
+    public  User GetUser(int id)
     {
         List<User>  list= users.stream().filter(u->u.getId()==id).collect(Collectors.toList());
         return list.get(0);
     }
-    private  Tag GetTag(int id)
+    public  Tag GetTag(int id)
     {
         List<Tag>  list= tags.stream().filter(u->u.getId()==id).collect(Collectors.toList());
         return list.get(0);
