@@ -91,18 +91,18 @@ public class UserStatistics {
                     .map(Map.Entry::getKey)
                     .collect(Collectors.toList());
 
-    private BiFunction<Qtree,User,List<Answer>> getUserAnswers =
-            (app, user) ->
-                    app.getQuestions().stream()
-                            .flatMap(q-> q.getAnswers().stream())
-                            .filter(a-> a.getUser().getId() == user.getId()).collect(Collectors.toList());
+//    private BiFunction<Qtree,User,List<Answer>> getUserAnswers =
+//            (app, user) ->
+//                    app.getQuestions().stream()
+//                            .flatMap(q-> q.getAnswers().stream())
+//                            .filter(a-> a.getUser().getId() == user.getId()).collect(Collectors.toList());
 
-    private BiFunction<Qtree,User,List<Question>> getUserQuestions =
-            (app, user)->
-                    app.getQuestions().stream().filter(q-> q.getUser().getId() == user.getId()).collect(Collectors.toList());
+//    private BiFunction<Qtree,User,List<Question>> getUserQuestions =
+//            (app, user)->
+//                    app.getQuestions().stream().filter(q-> q.getUser().getId() == user.getId()).collect(Collectors.toList());
 
-    private BiFunction<Qtree,User,Long> totalReputation = (q,u)-> getUserReputationByAnswers.apply(q,u)+
-            getUserReputationBasedOnQuestionAndAnswers.apply(q,u) ;
+//    private BiFunction<Qtree,User,Long> totalReputation = (q,u)-> getUserReputationByAnswers.apply(q,u)+
+//            getUserReputationBasedOnQuestionAndAnswers.apply(q,u) ;
 
     public Function<Qtree, String> mostAnsweringUser = (q) -> {
         return q.getQuestions().stream()
@@ -153,9 +153,4 @@ public class UserStatistics {
             .collect(Collectors.toList());
 
 
-  /*  BiFunction<Qtree,Integer,List<Answer>> topRatedAnswers = (q,k)->q.getQuestions().stream()
-            .flatMap(a->a.getAnswers().stream())
-            .flatMap(a->a.getVotes().stream())
-            .collect(Collectors.groupingBy(Vote::isLike),Collectors.summingInt(Vote::isLike))
-     */
 }
