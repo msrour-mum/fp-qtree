@@ -1,23 +1,22 @@
+import App.AnalysisFunctions;
 import App.FileTestDataReader;
 import App.Qtree;
 import App.UserStatistics;
 import model.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.Scanner;
 
 public class Main {
 
     private static Qtree qtree=null;
-    public static void main(String[] args)throws IOException
-    {
+    public static void main(String[] args) throws IOException, ParseException {
         FileTestDataReader reader=new FileTestDataReader();
         qtree= reader.Read();
 
@@ -25,7 +24,7 @@ public class Main {
         //List<User> list=    UserStatistics.topUserComments.apply(qtree,3);
     }
 
-    public static void consoleApp(){
+    public static void consoleApp() throws IOException, ParseException {
         System.out.println("                        Welcome to Qtree-fun Project ");
         System.out.println();
         System.out.println(" please choose the number ");
@@ -41,7 +40,7 @@ public class Main {
 
         selectQuetion(num);
     }
-    public static void selectQuetion(int quetionNum){
+    public static void selectQuetion(int quetionNum) throws IOException, ParseException {
         Scanner sc = new Scanner(System.in);
         switch (quetionNum){
             case 1 :{
@@ -97,15 +96,60 @@ public class Main {
             }
             case 10: {
                 System.out.println("method 10");
+                System.out.println("Function : Top k viewed question");
+                System.out.println("Enter K value");
+                int k= sc.nextInt();
+
+                List<Question> input= qtree.getQuestions();
+                AnalysisFunctions analysisFunctions=new AnalysisFunctions();
+                List<Question> result= analysisFunctions.getKViewedQuestions(input,k);
+                System.out.println("Function Result");
+                //System.out.println("Top viewed questions: "+result);
+                for (Question q:result
+                     ) {System.out.println("Question: "+q.getText());
+                }
                 break;
             }
             case 11: {
                 System.out.println("method 11");
+                System.out.println("Function : Trending k tag");
+                System.out.println("Enter K value");
+                int k= sc.nextInt();
+                System.out.println("Enter Date From (dd-MM-yyyy");
+                String dfs=sc.next();
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                Date dateFrom=df.parse(dfs);
+                System.out.println("Enter Date From (dd-MM-yyyy");
+                String dft=sc.next();
+                Date dateTo=df.parse(dft);
+
+
+                List<Question> input= qtree.getQuestions();
+                AnalysisFunctions analysisFunctions=new AnalysisFunctions();
+                List<Tag> result= analysisFunctions.getKTrendingTags(input,dateFrom,dateTo,k);
+                System.out.println("Function Result");
+                //System.out.println("Top viewed questions: "+result);
+                for (Tag t:result
+                ) {System.out.println("Tag: "+t.getName());
+                }
                 break;
             }
             case 12: {
                 System.out.println("method 12");
+                System.out.println("Function : Top Fake answer");
+                System.out.println("Enter K value");
+                int k= sc.nextInt();
+
+                List<Question> input= qtree.getQuestions();
+                AnalysisFunctions analysisFunctions=new AnalysisFunctions();
+                List<Answer> result= analysisFunctions.getKFakeAnswers(input,k);
+                System.out.println("Function Result");
+                //System.out.println("Top viewed questions: "+result);
+                for (Answer a:result
+                ) {System.out.println("Answer: "+a.getText());
+                }
                 break;
+                //top Fake answer
             }
             case 13: {
                 System.out.println("method 13");
