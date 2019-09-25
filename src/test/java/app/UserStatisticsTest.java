@@ -73,9 +73,9 @@ class UserStatisticsTest {
         List<Question> output = new UserStatistics().topAnsweredQuestions.apply(qtree, 3);
 
         List<Question> expectedResult = new ArrayList<>();
-        expectedResult.add(reader.GetQuestion(68));
+        expectedResult.add(reader.GetQuestion(22));
         expectedResult.add(reader.GetQuestion(1));
-        expectedResult.add(reader.GetQuestion(43));
+        expectedResult.add(reader.GetQuestion(47));
         System.out.println(expectedResult);
         Assert.assertEquals(expectedResult, output);
         System.out.println("Function topAnsweredQuestions() testing passed");

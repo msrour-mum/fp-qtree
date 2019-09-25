@@ -205,7 +205,7 @@ public class FileTestDataReader
 
     public  Tag GetTag(String name)
     {
-        List<Tag>  list= tags.stream().filter(u->u.getName()==name).collect(Collectors.toList());
+        List<Tag>  list= tags.stream().filter(u->u.getName().equals(name)).collect(Collectors.toList());
         return list.get(0);
     }
 
