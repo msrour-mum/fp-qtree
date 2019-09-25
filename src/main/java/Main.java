@@ -49,6 +49,7 @@ public class Main {
                 System.out.println("Function: top active user");
                 UserStatistics st=new UserStatistics();
                 System.out.println(st.topActiveUser.apply(qtree));
+               // System.out.println(st.);
                 break;
             }
             case 2: {

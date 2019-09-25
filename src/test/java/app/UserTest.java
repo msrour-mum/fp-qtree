@@ -10,11 +10,13 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.BiFunction;
 
 public class UserTest {
 
     private UserStatistics userStatistics;
     private  Qtree qtree = null;
+
 
     @Before
     public void setup() throws IOException {
@@ -43,5 +45,31 @@ public class UserTest {
         //Assert.assertEquals("User that has more questions_2:", 5, users.get(0).getId());
         System.out.println("Tested");
     }
+
+    @Test
+    public void testMostAnsweringUser(){
+
+    }
+
+    @Test
+    public void testTopActiveUser(){
+
+    }
+
+    @Test
+    public void testTopReputatedUser(){
+
+        List<User> users = qtree.getUsers();
+        BiFunction<Qtree,List<User>,String> topReputatedUser = (q,l) ->l.stream().
+                max((user1,user2)-> (int) (userStatistics.getUserReputationByAnswers.apply(q,user2)- userStatistics.
+                                        getUserReputationByAnswers.apply(q,user1))).get().getName() ;
+
+        String expected = topReputatedUser.apply(qtree,users);
+
+        String result = userStatistics.topReputatedUser.apply(qtree);
+
+        Assert.assertEquals("top Reputated User",expected,result);
+    }
+
 
 }

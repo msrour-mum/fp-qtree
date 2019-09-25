@@ -53,12 +53,12 @@ public class UserStatistics {
     /*
      User gains 10 points for each answer has good reputation
      */
-    private BiFunction<Qtree,User,Long> getUserReputationByAnswers =
+    public BiFunction<Qtree,User,Long> getUserReputationByAnswers =
             (app,user) -> getUserAnswersWithGoodReputation.apply(app, user)
                     .stream()
                     .filter(a-> isAnswerHasGoodReputation.test(a)).count() * 10;
 
-    private BiFunction<Qtree,User,Long> getUserReputationBasedOnQuestionAndAnswers =
+    public BiFunction<Qtree,User,Long> getUserReputationBasedOnQuestionAndAnswers =
             (app, u)-> app.getQuestions().stream()
                     .filter(q -> q.getUser().getId()==u.getId())
                     .filter(q -> isQuestionHasGoodReputation.test(q))
