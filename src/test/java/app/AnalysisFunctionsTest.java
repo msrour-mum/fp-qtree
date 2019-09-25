@@ -10,8 +10,6 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 
@@ -42,12 +40,12 @@ class AnalysisFunctionsTest {
         Date from= new GregorianCalendar(2007, 1, 1).getTime();
         Date to= new GregorianCalendar(2010, 1, 1).getTime();
 
-        List<Tag> output=new AnalysisFunctions().getKTrendingTags(input,from,to,3);
+        List<Tag> output=new AnalysisFunctions().getKTrendingTags(input,from,to,2);
 
         List<Tag> expectedResult= new ArrayList<>();
         expectedResult.add(reader.GetTag(1));
         expectedResult.add(reader.GetTag(9));
-        expectedResult.add(reader.GetTag(7));
+        //expectedResult.add(reader.GetTag(7));
 
         Assert.assertEquals(expectedResult,output);
     }
@@ -62,9 +60,8 @@ class AnalysisFunctionsTest {
         List<Answer> output=new AnalysisFunctions().getKFakeAnswers(input,3);
 
         List<Answer> expectedResult= new ArrayList<>();
-        //expectedResult.add(reader.(1));
-        //expectedResult.add(reader.GetTag(9));
-        //expectedResult.add(reader.GetTag(7));
+        expectedResult.add(reader.GetAnswer(28));
+        expectedResult.add(reader.GetAnswer(74));
 
         Assert.assertEquals(expectedResult,output);
     }
