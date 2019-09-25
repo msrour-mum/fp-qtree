@@ -5,27 +5,31 @@ import App.FileTestDataReader;
 import App.Qtree;
 import model.Question;
 import org.junit.Assert;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
+import static org.junit.Assert.*;
 
-class AnalysisFunctionsTest {
+public class AnalysisTest {
     private Analysis analysis;
-    private  Qtree data = null;
+    private Qtree data = null;
     private FileTestDataReader reader=null;
 
-    @BeforeEach
-    void setUp() throws IOException {
+    @Before
+    public void setUp() throws IOException {
         analysis = new Analysis();
         reader=new FileTestDataReader();
         data = reader.Read();
     }
 
-
     @Test
-    void getKViewedQuestionsTest() throws IOException {
+    public void getKViewedQuestions() {
         List<Question> input= data.getQuestions();
         List<String> output= analysis.getKViewedQuestions(input,3);
 
@@ -38,7 +42,7 @@ class AnalysisFunctionsTest {
     }
 
     @Test
-    void getKTrendingTags() throws IOException {
+    public void getKTrendingTags() {
         List<Question> input= data.getQuestions();
         Date from= new GregorianCalendar(2007, 1, 1).getTime();
         Date to= new GregorianCalendar(2009, 1, 1).getTime();
@@ -54,10 +58,7 @@ class AnalysisFunctionsTest {
     }
 
     @Test
-    void getKMostDislikedAnswers() throws IOException {
-        FileTestDataReader reader=new FileTestDataReader();
-        Qtree data= reader.Read();
-
+    public void getKMostDislikedAnswers() {
         List<Question> input= data.getQuestions();
 
         List<String> output= analysis.getKMostDislikedAnswers(input,3);
