@@ -102,6 +102,13 @@ public class Main {
             }
             case 15: {
                 System.out.println("method 15");
+                System.out.println("Function : Top rated answers");
+                System.out.println("Enter rank number");
+                int k= sc.nextInt();
+                UserStatistics st=new UserStatistics();
+                List<Answer> answerList= st.topRatedAnswers.apply(qtree,k);
+                System.out.println("Function Result");
+                System.out.println("Answers List: "+answerList.stream().collect(Collectors.toList()));
                 break;
             }
             case 16: {
