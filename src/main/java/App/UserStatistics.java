@@ -94,8 +94,10 @@ public class UserStatistics {
             (app, user)->
                     app.getQuestions().stream().filter(q-> q.getUser().getId() == user.getId()).collect(Collectors.toList());
 
+    private BiFunction<Qtree,User,Long> totalReputation = (q,u)-> getUserReputationByAnswers.apply(q,u)+
+            getUserReputationBasedOnQuestionAndAnswers.apply(q,u) ;
 
-    public static Function<Qtree, String> mostAnsweringUser = (q) -> {
+    public  Function<Qtree, String> mostAnsweringUser = (q) -> {
         return q.getQuestions().stream()
                 .flatMap(question -> question.getAnswers().stream())
                 .collect(Collectors.groupingBy(Answer::getUser)).entrySet().stream()
@@ -105,16 +107,15 @@ public class UserStatistics {
     };
     // Answer::getUser = answer -> answer.getUser()
 
-    Function<Qtree, String> topReputatedUser = (q) ->{
+    public Function<Qtree, String> topReputatedUser = (q) ->{
         return  q.getUsers().stream()
                 .max((user1, user2) -> (int) (getUserReputationByAnswers.apply(q,user2) - getUserReputationByAnswers.apply(q,user1)))
                 .get().getName();
     };
 
 
-    Function<Qtree,String> topActiveUser = q -> q.getUsers().stream().
-            max((user1,user2)->(int) (getUserReputationByAnswers.apply(q,user2)+getUserReputationBasedOnQuestionAndAnswers.apply(q,user2)
-                    -(getUserReputationByAnswers.apply(q,user1)-getUserReputationBasedOnQuestionAndAnswers.apply(q,user1)))).
+    public Function<Qtree,String> topActiveUser = q -> q.getUsers().stream().
+            max((user1,user2)->(int) (totalReputation.apply(q,user2) - totalReputation.apply(q,user1) )).
             get().getName() ;
 
 
