@@ -1,23 +1,18 @@
 package App;
 import model.*;
-
-import javax.swing.*;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.text.Collator;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 public class FileTestDataReader
 {
     public FileTestDataReader()
@@ -101,7 +96,7 @@ public class FileTestDataReader
         Answer currentAns=null;
         Comment currentComm=null;
         int id = 0;
-
+        String fileName="";
         List<Question> questions = new ArrayList<>();
         String cwd = System.getProperty("user.dir");
         List<Path> fileNames =  Files.walk(Paths.get(cwd+ "/src/main/java/TestData"))
@@ -111,7 +106,12 @@ public class FileTestDataReader
         for(Path file : fileNames) {
 
             try {
-                String fileName=String.valueOf(file);
+                fileName=String.valueOf(file);
+                System.out.println("===============================================================================");
+                System.out.println("Read File : "+fileName);
+                System.out.println("===============================================================================");
+
+
                 reader = new BufferedReader(new FileReader(fileName));
                 String line = reader.readLine();
                 while (line != null) {
@@ -127,6 +127,12 @@ public class FileTestDataReader
                         String txt = arr[3];
 
                         currentQ = new Question(id, txt, u, date);
+
+                        List<QuestionViews> views =new ArrayList<>();
+                        for (int i=0;i<noView;i++)
+                            views.add( new  QuestionViews(currentQ,date));
+                        currentQ.setViews(views);
+
                         questions.add(currentQ);
                     }
                     if (line.startsWith("A:")) {
@@ -162,7 +168,10 @@ public class FileTestDataReader
                             String[] vArr = x.split("\\,");
                             User u = GetUser(Integer.parseInt(vArr[0]));
                             int v = Integer.parseInt(vArr[1]);
-                            currentAns.getVotes().add(new Vote(u, null, true));
+                            boolean isLike=false;
+                            if (v==1) isLike=true;
+                            Date date=new Date(2019,1,1);
+                            currentAns.getVotes().add(new Vote(u,date , isLike));
                         }
                     }
 
@@ -170,6 +179,7 @@ public class FileTestDataReader
                 }
                 reader.close();
             } catch (IOException | ParseException e) {
+
                 e.printStackTrace();
                 return null;
             }
@@ -192,7 +202,4 @@ public class FileTestDataReader
         List<Tag>  list= tags.stream().filter(u->u.getId()==id).collect(Collectors.toList());
         return list.get(0);
     }
-
-
-
 }
