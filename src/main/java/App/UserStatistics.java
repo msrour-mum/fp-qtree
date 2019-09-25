@@ -85,7 +85,8 @@ public class UserStatistics {
             (app, k)-> app.getQuestions().stream()
                     .filter(q -> isQuestionHasGoodReputation.test(q))
                     .collect(Collectors.groupingBy(Question::getUser, Collectors.counting()))
-                    .entrySet().stream().sorted((g1, g2) -> g2.getValue().intValue() - g1.getValue().intValue()).limit(k)
+                    .entrySet().stream().sorted((g1, g2) -> g2.getValue().intValue() - g1.getValue().intValue())
+                    .limit(k)
                     .map(Map.Entry::getKey)
                     .collect(Collectors.toList());
 

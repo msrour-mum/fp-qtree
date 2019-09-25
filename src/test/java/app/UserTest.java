@@ -30,9 +30,11 @@ public class UserTest {
     public void testGetTopKUsersHaveQuestions(){
 
         List<User> users = userStatistics.getTopKUsersHaveQuestions.apply(qtree,1);
+        System.out.println("testGetTopKUsersHaveQuestions");
+        System.out.println(users);
 
         Assert.assertEquals("Number of users", 1, users.size());
-        Assert.assertEquals("User that has more questions:", 5, users.get(0).getId());
+        Assert.assertEquals("User that has more questions:", 8, users.get(0).getId());
         System.out.println("Tested");
     }
 
@@ -42,17 +44,21 @@ public class UserTest {
         List<User> users = userStatistics.getTopKUsersHaveQuestions.apply(qtree,2);
 
         Assert.assertEquals("Number of users", 2, users.size());
-        Assert.assertEquals("User that has more questions_2:", 5, users.get(0).getId());
+        System.out.println("testGetTopKUsersHaveQuestions2");
+        System.out.println(users);
+        Assert.assertEquals("User that has more questions_2:", 8, users.get(0).getId());
         System.out.println("Tested");
     }
 
     @Test
     public void testGetTopKUsersReputationBasedOnAnswersVotes(){
 
-        List<User> users = userStatistics.getTopKUsersReputationBasedOnAnswersVotes.apply(qtree,1);
+        List<User> users = userStatistics.getTopKUsersReputationBasedOnAnswersVotes.apply(qtree,3);
 
-        Assert.assertEquals("Number of users", 1, users.size());
-        Assert.assertEquals("User that has more questions:", 1, users.get(0).getId());
+        System.out.println("testGetTopKUsersReputationBasedOnAnswersVotes");
+        System.out.println(users);
+        Assert.assertEquals("Number of users", 3, users.size());
+        Assert.assertEquals("User that has more questions:", 2, users.get(1).getId());
         System.out.println("Tested");
     }
 
@@ -61,8 +67,10 @@ public class UserTest {
 
         List<User> users = userStatistics.getTopKUsersReputationBasedOnQuestionAndAnswers.apply(qtree,3);
 
+        System.out.println("testGetTopKUsersReputationBasedOnQuestionAndAnswers");
+        System.out.println(users);
         Assert.assertEquals("Number of users", 3, users.size());
-        Assert.assertEquals("User that has more questions:", 7, users.get(2).getId());
+        Assert.assertEquals("User that has more questions:", 8, users.get(0).getId());
         System.out.println("Tested");
     }
 
