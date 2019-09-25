@@ -96,6 +96,8 @@ public class UserStatistics {
             (app, user)->
                     app.getQuestions().stream().filter(q-> q.getUser().getId() == user.getId()).collect(Collectors.toList());
 
+    private BiFunction<Qtree,User,Long> totalReputation = (q,u)-> getUserReputationByAnswers.apply(q,u)+
+            getUserReputationBasedOnQuestionAndAnswers.apply(q,u) ;
 
     public Function<Qtree, String> mostAnsweringUser = (q) -> {
         return q.getQuestions().stream()
