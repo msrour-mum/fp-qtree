@@ -30,12 +30,12 @@ public class UserStatistics {
 
     public static BiFunction<List<Question>, Integer, List<User>> getTopKUsersHaveQuestions =
             (qt, k) ->
-                     qt.stream()
-                    .filter(q -> q.getAnswers().stream().filter(a -> a.getVotes().size() > 0).count() > 0)
-                    .collect(Collectors.groupingBy(Question::getUser, Collectors.counting()))
-                    .entrySet().stream().sorted((g1, g2) -> g2.getValue().intValue() - g1.getValue().intValue()).limit(k)
-                    .map(g -> g.getKey())
-                    .collect(Collectors.toList());
+                    qt.stream()
+                            .filter(q -> q.getAnswers().stream().filter(a -> a.getVotes().size() > 0).count() > 0)
+                            .collect(Collectors.groupingBy(Question::getUser, Collectors.counting()))
+                            .entrySet().stream().sorted((g1, g2) -> g2.getValue().intValue() - g1.getValue().intValue()).limit(k)
+                            .map(g -> g.getKey())
+                            .collect(Collectors.toList());
 
     /*
     get all user's answers that has good reputation,  good reputation calculation depends on number of up votes and number
@@ -56,35 +56,69 @@ public class UserStatistics {
                     .stream()
                     .filter(a-> isAnswerHasGoodReputation.test(a)).count() * 10;
 
+    public static BiFunction<Qtree,User,Long> getUserReputationBasedOnQuestionAndAnswers =
+            (app, u)-> app.getQuestions().stream()
+                    .filter(q -> q.getUser().getId()==u.getId())
+                    .filter(q -> q.getAnswers().size() >= 3 || q.getAnswers().stream().anyMatch(a-> a.isVerified()))
+                    .count()*10 ;
+
+
+
     /*
     Get top N users reputation who has the most answers that has the up votes more than down votes by 1.6 times
     */
     public static BiFunction<Qtree,Integer,List<User>> getTopKUsersReputationBasedOnAnswersVotes =
             (app, k)-> app.getUsers().stream()
-                        .sorted((u1, u2)-> getUserReputationByAnswers.apply(app, u2).intValue() - getUserReputationByAnswers.apply(app, u1).intValue())
-                        .limit(k)
-                        .collect(Collectors.toList());
+                    .sorted((u1, u2)-> getUserReputationByAnswers.apply(app, u2).intValue() - getUserReputationByAnswers.apply(app, u1).intValue())
+                    .limit(k)
+                    .collect(Collectors.toList());
 
     /*
-   Get top N users reputation who has the question that have at least 3 answers that has the up votes more than down votes by 1.6 times
+   Get top N users reputation who has the question that have at least 3 answers or one verified answer
    */
     public static BiFunction<Qtree,Integer,List<User>> getTopKUsersReputationBasedOnQuestionAndAnswers =
             (app, k)-> app.getQuestions().stream()
-                    .filter(q -> q.getAnswers().size() >= 3)
+                    .filter(q -> q.getAnswers().size() >= 3 || q.getAnswers().stream().anyMatch(a-> a.isVerified()))
                     .collect(Collectors.groupingBy(Question::getUser, Collectors.counting()))
                     .entrySet().stream().sorted((g1, g2) -> g2.getValue().intValue() - g1.getValue().intValue()).limit(k)
                     .map(Map.Entry::getKey)
                     .collect(Collectors.toList());
 
     public static BiFunction<Qtree,User,List<Answer>> getUserAnswers =
-        (app, user) ->
-      app.getQuestions().stream()
-                .flatMap(q-> q.getAnswers().stream())
-                .filter(a-> a.getUser().getId() == user.getId()).collect(Collectors.toList());
+            (app, user) ->
+                    app.getQuestions().stream()
+                            .flatMap(q-> q.getAnswers().stream())
+                            .filter(a-> a.getUser().getId() == user.getId()).collect(Collectors.toList());
 
     public static BiFunction<Qtree,User,List<Question>> getUserQuestions =
-         (app, user)->
-         app.getQuestions().stream().filter(q-> q.getUser().getId() == user.getId()).collect(Collectors.toList());
+            (app, user)->
+                    app.getQuestions().stream().filter(q-> q.getUser().getId() == user.getId()).collect(Collectors.toList());
+
+
+    public static Function<Qtree, String> mostAnsweringUser = (q) -> {
+        return q.getQuestions().stream()
+                .flatMap(question -> question.getAnswers().stream())
+                .collect(Collectors.groupingBy(Answer::getUser)).entrySet().stream()
+                .max((map1, map2) -> map2.getValue().size() - map1.getValue().size())
+
+                .map(map -> map.getKey()).get().getName();
+    };
+    // Answer::getUser = answer -> answer.getUser()
+
+    Function<Qtree, String> topReputatedUser = (q) ->{
+        return  q.getUsers().stream()
+                .max((user1, user2) -> (int) (getUserReputationByAnswers.apply(q,user2) - getUserReputationByAnswers.apply(q,user1)))
+                .get().getName();
+    };
+
+
+    Function<Qtree,String> topActiveUser = q -> q.getUsers().stream().
+            max((user1,user2)->(int) (getUserReputationByAnswers.apply(q,user2)+getUserReputationBasedOnQuestionAndAnswers.apply(q,user2)
+                    -(getUserReputationByAnswers.apply(q,user1)-getUserReputationBasedOnQuestionAndAnswers.apply(q,user1)))).
+            get().getName() ;
+
+
+
 
 
 

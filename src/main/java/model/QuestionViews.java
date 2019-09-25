@@ -7,6 +7,10 @@ public class QuestionViews {
     private Question question;
     private Date date;
 
+
+
+
+
     public QuestionViews(Question question, Date date) {
         this.question = question;
         this.date = date;
