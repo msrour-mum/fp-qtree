@@ -1,7 +1,6 @@
 import App.*;
 import model.*;
 import model.Question;
-import model.QuestionTag;
 import model.Tag;
 import model.User;
 
@@ -10,14 +9,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Main {
 
@@ -149,8 +144,8 @@ public class Main {
                 int k= sc.nextInt();
 
                 List<Question> input= qtree.getQuestions();
-                AnalysisFunctions analysisFunctions=new AnalysisFunctions();
-                List<String> result= analysisFunctions.getKViewedQuestions(input,k);
+                Analysis analysis =new Analysis();
+                List<String> result= analysis.getKViewedQuestions(input,k);
                 System.out.println("Function Result");
                 //System.out.println("Top viewed questions: "+result);
                 for (String q:result
@@ -173,8 +168,8 @@ public class Main {
 
 
                 List<Question> input= qtree.getQuestions();
-                AnalysisFunctions analysisFunctions=new AnalysisFunctions();
-                List<String> result= analysisFunctions.getKTrendingTags(input,dateFrom,dateTo,k);
+                Analysis analysis =new Analysis();
+                List<String> result= analysis.getKTrendingTags(input,dateFrom,dateTo,k);
                 System.out.println("Function Result");
                 for (String t:result
                 ) {System.out.println("Tag: "+t);
@@ -188,8 +183,8 @@ public class Main {
                 int k= sc.nextInt();
 
                 List<Question> input= qtree.getQuestions();
-                AnalysisFunctions analysisFunctions=new AnalysisFunctions();
-                List<String> result= analysisFunctions.getKMostDislikedAnswers(input,k);
+                Analysis analysis =new Analysis();
+                List<String> result= analysis.getKMostDislikedAnswers(input,k);
                 System.out.println("Function Result");
                 //System.out.println("Top viewed questions: "+result);
                 for (String a:result

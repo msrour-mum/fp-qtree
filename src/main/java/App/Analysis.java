@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
-public class AnalysisFunctions {
+public class Analysis {
     public List<String> getKViewedQuestions(List<Question> questions, Integer k) {
         List<String> result = null;
         BiFunction<List<Question>, Integer, List<String>> getKViewedQuest =

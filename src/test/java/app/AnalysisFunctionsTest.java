@@ -1,14 +1,10 @@
 package app;
 
-import App.AnalysisFunctions;
+import App.Analysis;
 import App.FileTestDataReader;
 import App.Qtree;
-import App.UserStatistics;
-import model.Answer;
 import model.Question;
-import model.Tag;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
@@ -16,13 +12,13 @@ import java.util.*;
 
 
 class AnalysisFunctionsTest {
-    private AnalysisFunctions analysisFunctions;
+    private Analysis analysis;
     private  Qtree data = null;
     private FileTestDataReader reader=null;
 
     @BeforeEach
     void setUp() throws IOException {
-        analysisFunctions = new AnalysisFunctions();
+        analysis = new Analysis();
         reader=new FileTestDataReader();
         data = reader.Read();
     }
@@ -31,7 +27,7 @@ class AnalysisFunctionsTest {
     @Test
     void getKViewedQuestionsTest() throws IOException {
         List<Question> input= data.getQuestions();
-        List<String> output=analysisFunctions.getKViewedQuestions(input,3);
+        List<String> output= analysis.getKViewedQuestions(input,3);
 
         List<String> expectedResult= new ArrayList<>();
         expectedResult.add("Obtain column data from One-To-Many join relation in Spring data JPA");
@@ -47,7 +43,7 @@ class AnalysisFunctionsTest {
         Date from= new GregorianCalendar(2007, 1, 1).getTime();
         Date to= new GregorianCalendar(2009, 1, 1).getTime();
 
-        List<String> output=analysisFunctions.getKTrendingTags(input,from,to,3);
+        List<String> output= analysis.getKTrendingTags(input,from,to,3);
 
         List<String> expectedResult= new ArrayList<>();
         expectedResult.add("Angular");
@@ -64,7 +60,7 @@ class AnalysisFunctionsTest {
 
         List<Question> input= data.getQuestions();
 
-        List<String> output=analysisFunctions.getKMostDislikedAnswers(input,3);
+        List<String> output= analysis.getKMostDislikedAnswers(input,3);
 
         List<String> expectedResult= new ArrayList<>();
         expectedResult.add("Senate inquiry, interviews, first dates");

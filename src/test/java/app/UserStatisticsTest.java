@@ -1,6 +1,5 @@
 package app;
 
-import App.AnalysisFunctions;
 import App.FileTestDataReader;
 import App.Qtree;
 import App.UserStatistics;
@@ -14,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserStatisticsTest {
 
