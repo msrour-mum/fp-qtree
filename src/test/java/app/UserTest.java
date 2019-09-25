@@ -11,6 +11,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public class UserTest {
 
@@ -83,7 +84,15 @@ public class UserTest {
     }
 
     @Test
-    public void testTopActiveUser(){
+    public void testTopActiveKUser(){
+        List<User> users = qtree.getUsers();
+        int k = 3 ;
+        BiFunction<Qtree,List<User>,List<User>>  expectedfun = (q,l) -> l.stream().
+                sorted((u1,u2)-> (int) (userStatistics.totalUserReputation.apply(q,u2) - userStatistics.totalUserReputation.apply(q,u1))).
+                limit(k).collect(Collectors.toList());
+        List<User> expectedList = expectedfun.apply(qtree,users);
+        List<User> actualList = userStatistics.topActiveKUser.apply(qtree,k) ;
+        Assert.assertEquals("top Active k Users",expectedList,actualList);
 
     }
 

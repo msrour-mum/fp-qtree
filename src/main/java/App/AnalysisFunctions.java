@@ -50,12 +50,13 @@ public class AnalysisFunctions {
     private boolean isFakeAnswer(Answer answer)
     {
         Function<Answer,Boolean> isFakeAnswer=a -> answer.getVotes().stream()
+                .filter(vote -> vote!=null)
                 .collect(Collectors.groupingBy(Vote::isLike,Collectors.counting()))
                 .entrySet()
                 .stream()
                 .max((o1, o2) -> o2.getValue().intValue()-o1.getValue().intValue())
                 .map(booleanLongEntry -> (Boolean) booleanLongEntry.getKey() )
-                .orElse(false);
+                .orElse(true);
 
         return isFakeAnswer.apply(answer);
     }

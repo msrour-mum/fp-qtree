@@ -8,7 +8,6 @@ import model.Question;
 import model.Tag;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -45,7 +44,7 @@ class AnalysisFunctionsTest {
         List<Tag> expectedResult= new ArrayList<>();
         expectedResult.add(reader.GetTag(1));
         expectedResult.add(reader.GetTag(9));
-        //expectedResult.add(reader.GetTag(7));
+
 
         Assert.assertEquals(expectedResult,output);
     }
