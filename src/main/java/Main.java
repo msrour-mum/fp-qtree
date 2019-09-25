@@ -39,7 +39,7 @@ public class Main {
         System.out.print("1-top active user\n2-top Reputated user \n3-most answering user \n4-top user has question "+
                 "\n5-calculate reputation by answers \n6-calculate reputation by ques&answers \n7-top commented Answer "+
                 "\n8-top commented questions \n9- num of Question by tag &date \n10- Top k viewed question \n11- Trending k tag "+
-                "\n12- Top Fake answer \n14- top active user \n15- top rated answers \n16- top user comments ");
+                "\n12- Top Fake answer \n14- top Answered Questions \n15- top rated answers \n16- top user comments ");
         System.out.println('\n');
         System.out.println("choice : ");
         Scanner sc = new Scanner(System.in);
@@ -202,11 +202,17 @@ public class Main {
                 break;
             }
             case 14: {
-                System.out.println("method 14");
+                System.out.println("Function : Top Answered Questions");
+                System.out.println("Enter rank number");
+                int k= sc.nextInt();
+                UserStatistics st=new UserStatistics();
+                List<Question> answerList= st.topAnsweredQuestions.apply(qtree,k);
+                System.out.println("Function Result");
+                System.out.println("Question List: "+answerList.stream().collect(Collectors.toList()));
                 break;
             }
             case 15: {
-                System.out.println("method 15");
+
                 System.out.println("Function : Top rated answers");
                 System.out.println("Enter rank number");
                 int k= sc.nextInt();
@@ -217,7 +223,7 @@ public class Main {
                 break;
             }
             case 16: {
-                System.out.println("method 16");
+
                 System.out.println("Function : Top user comments");
                 System.out.println("Enter rank number");
                 int k= sc.nextInt();
