@@ -1,0 +1,12 @@
+Q:5|2019-01-20 14:45:30|120|I want to let you in on a little secret called
+T:1,7,9
+A:10|2019-02-02 08:30:01|0|Journalists love it, Writers love it
+V:3,1|5,0|1,1|2,0|6,1|7,1
+C:5|2019-04-02 9:30:01|Hi booo
+C:6|2019-04-02 9:31:01|Hi booo2222
+A:3|2019-04-02 22:30:01|1|you will also learn to use them more effectively
+V:2,1|3,1|3,1|5,1|6,0|7,1
+C:2|2019-05-02 14:30:01|let me point out that Q 
+C:2|2019-05-02 14:32:01|you get the right answers, and thus
+A:1|2019-05-02 14:30:01|0|Senate inquiry, interviews, first dates
+A:4|2019-05-02 14:30:01|0|YouTube channel

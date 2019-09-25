@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,11 @@ public class Question {
         this.text = text;
         this.user = user;
         this.date = date;
+
+        if (this.answers==null)
+            this.answers=new ArrayList<>();
+        if (this.tags==null)
+            this.tags=new ArrayList<>();
     }
 
     public long getId() {

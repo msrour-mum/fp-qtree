@@ -1,9 +1,6 @@
 package App;
 
-import model.Answer;
-import model.Question;
-import model.User;
-import model.Vote;
+import model.*;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +8,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserStatistics {
 
@@ -87,5 +85,60 @@ public class UserStatistics {
     public static BiFunction<Qtree,User,List<Question>> getUserQuestions =
          (app, user)->
          app.getQuestions().stream().filter(q-> q.getUser().getId() == user.getId()).collect(Collectors.toList());
+
+
+
+    //top user comments
+    BiFunction<Qtree,Integer, List<User>> topUserComments = (q,k)->q.getQuestions().stream()
+            .flatMap(a->a.getAnswers().stream())
+            .flatMap(c->c.getComments().stream())
+            .collect(Collectors.groupingBy(Comment::getUser,Collectors.counting()))
+            .entrySet()
+            .stream()
+            .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
+            .map(f->(User)f.getKey())
+            .limit(k)
+            .collect(Collectors.toList());
+
+    //Zain :top rated answers
+    BiFunction<Qtree,Integer,List<Answer>> topRatedAnswers = (q,k)->q.getQuestions().stream()
+            .flatMap(a->a.getAnswers().stream())
+            .sorted((a1,a2)->a2.getVotes().size()-a1.getVotes().size())
+            .limit(k)
+            .collect(Collectors.toList());
+
+  /*  BiFunction<Qtree,Integer,List<Answer>> topRatedAnswers = (q,k)->q.getQuestions().stream()
+            .flatMap(a->a.getAnswers().stream())
+            .flatMap(a->a.getVotes().stream())
+            .collect(Collectors.groupingBy(Vote::isLike),Collectors.summingInt(Vote::isLike))
+     */
+
+
+
+    //Zain :Top Active Users [Date]
+    Function<Qtree,Map<User,Long>> subTopUserQuestion=q->q.getQuestions().stream()
+            .collect(Collectors.groupingBy(Question::getUser,Collectors.counting()))
+            .entrySet()
+            .stream()
+            .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
+            .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
+
+    Function<Qtree,Map<User,Long>> subTopUserAnswers=q->q.getQuestions().stream()
+            .flatMap(a->a.getAnswers().stream())
+            .collect(Collectors.groupingBy(Answer::getUser,Collectors.counting()))
+            .entrySet()
+            .stream()
+            .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
+            .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
+
+    Function<Qtree,Map<User,Long>> subTopUserComments=q->q.getQuestions().stream()
+            .flatMap(a->a.getAnswers().stream())
+            .flatMap(a->a.getComments().stream())
+            .collect(Collectors.groupingBy(Comment::getUser,Collectors.counting()))
+            .entrySet()
+            .stream()
+            .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
+            .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
+
 
 }
