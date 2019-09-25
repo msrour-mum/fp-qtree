@@ -117,11 +117,12 @@ public class UserStatistics {
                 .max((user1, user2) -> (int) (getUserReputationByAnswers.apply(q,user2) - getUserReputationByAnswers.apply(q,user1)))
                 .get().getName();
     };
+    public BiFunction<Qtree,User,Long> totalUserReputation = (q,u)-> getUserReputationByAnswers.apply(q,u)+
+            getUserReputationBasedOnQuestionAndAnswers.apply(q,u);
 
-    public Function<Qtree,String> topActiveUser = q -> q.getUsers().stream().
-            max((user1,user2)->(int) (getUserReputationByAnswers.apply(q,user2)+getUserReputationBasedOnQuestionAndAnswers.apply(q,user2)
-                    -(getUserReputationByAnswers.apply(q,user1)-getUserReputationBasedOnQuestionAndAnswers.apply(q,user1)))).
-            get().getName() ;
+    public BiFunction<Qtree,Integer,List<User>> topActiveKUser = (q,k) -> q.getUsers().stream().
+            sorted((user1,user2)->(int) (totalUserReputation.apply(q,user2) -totalUserReputation.apply(q,user1))).limit(k)
+            .collect(Collectors.toList());
 
     //top user comments
     public BiFunction<Qtree,Integer, List<User>> topUserComments = (q,k)->q.getQuestions().stream()
