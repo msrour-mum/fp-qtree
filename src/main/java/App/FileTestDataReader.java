@@ -30,20 +30,20 @@ public class FileTestDataReader
         users.add(user2);
         users.add(user3);
 
-        users.add(new User(4,"User 4"));
-        users.add(new User(5,"User 4"));
-        users.add(new User(6,"User 4"));
-        users.add(new User(7,"User 4"));
-        users.add(new User(8,"User 4"));
-        users.add(new User(9,"User 4"));
-        users.add(new User(10,"User 4"));
-        users.add(new User(11,"User 4"));
-        users.add(new User(12,"User 4"));
-        users.add(new User(13,"User 4"));
-        users.add(new User(14,"User 4"));
-        users.add(new User(15,"User 4"));
-        users.add(new User(16,"User 4"));
-        users.add(new User(17,"User 4"));
+        users.add(new User(4,"Custom"));
+        users.add(new User(5,"Custom"));
+        users.add(new User(6,"Custom"));
+        users.add(new User(7,"Custom"));
+        users.add(new User(8,"Custom"));
+        users.add(new User(9,"Custom"));
+        users.add(new User(10,"Custom"));
+        users.add(new User(11,"Custom"));
+        users.add(new User(12,"Custom"));
+        users.add(new User(13,"Custom"));
+        users.add(new User(14,"Custom"));
+        users.add(new User(15,"Custom"));
+        users.add(new User(16,"Custom"));
+        users.add(new User(17,"Custom"));
 
 
 

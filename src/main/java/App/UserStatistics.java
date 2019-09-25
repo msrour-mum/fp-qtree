@@ -22,7 +22,7 @@ public class UserStatistics {
     isAnswer has good reputation if it's marked as answered or number of up votes more than number of down votes by 1.6
      */
     private Predicate<Answer> isAnswerHasGoodReputation = (a)->
-            a.isVerified() || (getAnswerUpVotesCount.apply(a)/ getAnswerUpVotesCount.apply(a) == 0 ? 1 : getAnswerDownVotesCount.apply(a)) > 1.6;
+            a.isVerified() || (getAnswerUpVotesCount.apply(a)/ (getAnswerDownVotesCount.apply(a) == 0 ? 1 : getAnswerDownVotesCount.apply(a))) > 1.6;
 
     private Predicate<Question> isQuestionHasGoodReputation = (q)->
             q.getAnswers().size() >= 3 || q.getAnswers().stream().anyMatch(Answer::isVerified);
@@ -30,9 +30,9 @@ public class UserStatistics {
      Get top N users who has most questions that have at least one voted answer.
      */
 
-    public BiFunction<List<Question>, Integer, List<User>> getTopKUsersHaveQuestions =
-            (qt, k) ->
-                    qt.stream()
+    public BiFunction<Qtree, Integer, List<User>> getTopKUsersHaveQuestions =
+            (app, k) ->
+                    app.getQuestions().stream()
                             .filter(q -> q.getAnswers().stream().anyMatch(a -> a.getVotes().size() > 0))
                             .collect(Collectors.groupingBy(Question::getUser, Collectors.counting()))
                             .entrySet().stream().sorted((g1, g2) -> g2.getValue().intValue() - g1.getValue().intValue()).limit(k)

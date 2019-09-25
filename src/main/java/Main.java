@@ -57,15 +57,30 @@ public class Main {
                 break;
             }
             case 4: {
-                System.out.println("method 4");
+                System.out.println("Enter rank number");
+                int k= sc.nextInt();
+                UserStatistics st=new UserStatistics();
+                List<User> users= st.getTopKUsersHaveQuestions.apply(qtree,k);
+                System.out.println("Function Result");
+                System.out.println("User List: "+ users);
                 break;
             }
             case 5: {
-                System.out.println("method 5");
+                System.out.println("Enter rank number");
+                int k= sc.nextInt();
+                UserStatistics st=new UserStatistics();
+                List<User> users= st.getTopKUsersReputationBasedOnAnswersVotes.apply(qtree,k);
+                System.out.println("Function Result");
+                System.out.println("User List: "+ users);
                 break;
             }
             case 6: {
-                System.out.println("method 6");
+                System.out.println("Enter rank number");
+                int k= sc.nextInt();
+                UserStatistics st=new UserStatistics();
+                List<User> users= st.getTopKUsersReputationBasedOnQuestionAndAnswers.apply(qtree,k);
+                System.out.println("Function Result");
+                System.out.println("User List: "+ users);
                 break;
             }
             case 7: {
