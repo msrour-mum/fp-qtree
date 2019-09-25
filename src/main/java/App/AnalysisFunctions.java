@@ -20,7 +20,6 @@ public class AnalysisFunctions {
         result = getKViewedQuest.apply(questions, k);
         return result;
     }
-
     public List<Tag> getKTrendingTags(List<Question> questions, Date from, Date to, Integer K) {
         List<Tag> result = null;
         FunctionX4<List<Question>, Date, Date, Integer, List<Tag>> getKTrendingTags =

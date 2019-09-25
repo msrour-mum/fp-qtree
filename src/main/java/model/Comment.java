@@ -10,7 +10,7 @@ public class Comment {
     private Date date;
     private User user;
 
-    public Comment(long id, String text, Date date, User user) {
+    public Comment(long id, String text,User user, Date date ) {
         this.id = id;
         this.text = text;
         this.date = date;

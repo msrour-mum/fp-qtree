@@ -21,7 +21,7 @@ public class Qtree {
 
     private List<Tag> tags;
 
-    public Qtree(List<User> users, List<Question> questions, List<Tag> tags) {
+    public Qtree( List<Question> questions,  List<User> users, List<Tag> tags) {
         this.users = users;
         this.questions = questions;
         this.tags=tags;

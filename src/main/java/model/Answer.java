@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Answer {
     private List<Comment> comments;
     private List<Vote> votes;
 
-    public Answer(long id, String text, Date date, User user, boolean isVerified, List<Comment> comments, List<Vote> votes) {
+    public Answer(long id, String text,  User user, Date date,boolean isVerified, List<Comment> comments, List<Vote> votes) {
         this.id = id;
         this.text = text;
         this.date = date;
@@ -21,6 +22,11 @@ public class Answer {
         this.isVerified = isVerified;
         this.comments = comments;
         this.votes = votes;
+
+        if (this.comments==null)
+            this.comments=new ArrayList<>();
+        if (this.votes==null)
+            this.votes=new ArrayList<>();
     }
 
     public long getId() {
