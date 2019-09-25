@@ -15,10 +15,11 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static Qtree qtree=null;
     public static void main(String[] args)throws IOException
     {
         FileTestDataReader reader=new FileTestDataReader();
-        Qtree qtree= reader.Read();
+        qtree= reader.Read();
 
         consoleApp();
         //List<User> list=    UserStatistics.topUserComments.apply(qtree,3);
@@ -34,12 +35,14 @@ public class Main {
                 "\n8-top commented questions \n9- num of Question by tag &date \n10- top k viewed question \n11- tag analysis "+
                 "\n12- trending k tag \n13- top Fake answer \n14- top active user \n15- top rated answers \n16- top user comments ");
         System.out.println('\n');
+        System.out.println("choice : ");
         Scanner sc = new Scanner(System.in);
         int num = sc.nextInt();
 
         selectQuetion(num);
     }
     public static void selectQuetion(int quetionNum){
+        Scanner sc = new Scanner(System.in);
         switch (quetionNum){
             case 1 :{
                 System.out.println("method 1");
@@ -103,6 +106,13 @@ public class Main {
             }
             case 16: {
                 System.out.println("method 16");
+                System.out.println("Function : Top user comments");
+                System.out.println("Enter rank number");
+                int k= sc.nextInt();
+                UserStatistics st=new UserStatistics();
+                List<User> users= st.topUserComments.apply(qtree,k);
+                System.out.println("Function Result");
+                System.out.println("User List: "+users.stream().collect(Collectors.toList()));
                 break;
             }
             default: {
@@ -111,9 +121,12 @@ public class Main {
             }
 
         }
+        System.out.println();
+        System.out.println("-------------------------------------------------------");
+        System.out.println();
         System.out.println("select another function");
 
-        Scanner sc = new Scanner(System.in);
+
         int num = sc.nextInt();
         selectQuetion(num);
     }
