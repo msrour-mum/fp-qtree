@@ -203,6 +203,12 @@ public class FileTestDataReader
         return list.get(0);
     }
 
+    public  Tag GetTag(String name)
+    {
+        List<Tag>  list= tags.stream().filter(u->u.getName()==name).collect(Collectors.toList());
+        return list.get(0);
+    }
+
 
     public Question GetQuestion(int id)
     {
