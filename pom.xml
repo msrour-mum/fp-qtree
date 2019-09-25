@@ -18,6 +18,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>fp-qtree</finalName>
     </build>
     <dependencies>
         <dependency>
