@@ -1,0 +1,18 @@
+Q:5|2008-01-20 14:45:30|120|What is FP?
+T:1,7,9
+A:10|2008-02-02 08:30:01|0|Functional Programming
+V:3,1|5,1|1,1|2,1|6,1|7,0
+C:5|2019-04-02 9:30:01|That's true
+C:5|2019-04-02 9:31:01|Thanks
+A:3|2019-04-02 22:30:01|1|lol how you don't know that?
+V:3,0|5,0|1,0|2,0|6,0|7,0
+C:2|2019-05-02 14:30:01|You have to apologize
+Q:3|2007-01-20 14:45:30|200|What is Generics?
+T:1,7,9
+A:10|2008-02-02 08:30:01|0|Please look to this URL (http://generics.com)
+V:3,1|5,1|1,0|2,0|6,1|7,1
+C:5|2008-04-02 9:30:01|Very useful link
+C:10|2008-04-02 9:31:01|That's helps me a lot
+A:3|2008-04-02 22:30:01|1|Also this link could help too (http://whygenerics.com)
+V:3,1|5,0|1,0|2,0|6,0|7,1
+C:2|2008-05-02 14:30:01|You have to apologize
