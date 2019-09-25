@@ -22,7 +22,7 @@ public class UserStatistics {
     isAnswer has good reputation if it's marked as answered or number of up votes more than number of down votes by 1.6
      */
     private Predicate<Answer> isAnswerHasGoodReputation = (a)->
-            a.isVerified() || (getAnswerUpVotesCount.apply(a)/ (getAnswerDownVotesCount.apply(a) == 0 ? 1 : getAnswerDownVotesCount.apply(a))) > 5;
+            a.isVerified() || (getAnswerUpVotesCount.apply(a)/ (getAnswerDownVotesCount.apply(a) == 0 ? 1 : getAnswerDownVotesCount.apply(a))) > 1.6;
 
     private Predicate<Question> isQuestionHasGoodReputation = (q)->
             q.getAnswers().size() >= 3 || q.getAnswers().stream().anyMatch(Answer::isVerified);
@@ -47,7 +47,6 @@ public class UserStatistics {
     private BiFunction<Qtree,User,List<Answer>> getUserAnswersWithGoodReputation =
             (app, user)->
                     app.getQuestions().stream()
-                            .filter(q -> q.getUser().getId() == user.getId())
                             .flatMap(q-> q.getAnswers().stream())
                             .filter(a -> a.getUser().getId() == user.getId())
                             .filter(a-> isAnswerHasGoodReputation.test(a))
