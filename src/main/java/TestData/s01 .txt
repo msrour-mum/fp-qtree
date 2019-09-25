@@ -1,0 +1,30 @@
+﻿Q:1|2019-02-09 14:45:30|25|when should I use java stream ?
+T:1,3,4
+A:2|2019-03-02 14:30:01|0|In java 1.8
+V:2,1|3,0|3,1|2,0|6,0|7,1
+C:2|2019-05-04 14:30:01|I agree with you
+C:9|2019-05-05 14:30:01|No I don’t think so
+C:2|2019-05-09 14:30:01|That is true  
+C:1|2019-05-01 14:30:01|this is a good answer
+A:3|2019-05-05 14:30:01|1|It is old but I don’t know when
+V:2,1|9,1|2,0|5,-1|6,-1|8,1
+C:6|2019-05-06 14:30:01|same as me
+C:2|2019-05-06 14:40:01|I think it is in 2015
+A:3|2019-05-06 14:50:01|0|if you mean lambda expression it is in 1.8
+A:4|2019-05-06 14:55:01|0|this is dumb question fuck of
+
+
+Q:5|2019-02-09 14:15:30|25|what is the best language to learn 
+T:1,2,4
+A:2|2019-03-02 14:30:01|0|java
+V:2,1|3,0|3,1|2,0|5,1
+C:2|2019-03-04 14:30:01|I agree with you
+C:9|2019-03-01 14:30:01|No I don’t think so
+C:2|2019-03-11 14:30:01|That is true  
+C:1|2019-05-01 14:30:01|this is a good answer
+A:3|2019-05-05 14:30:01|1|javascript
+V:2,0|3,0|2,0|5,-1
+C:6|2019-05-06 14:30:01|same as me
+C:2|2019-05-06 14:40:01|it is very confusing
+A:3|2019-05-06 14:50:01|0|scala
+A:4|2019-05-06 14:55:01|0|c#
