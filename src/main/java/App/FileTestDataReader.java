@@ -171,7 +171,7 @@ public class FileTestDataReader
                             boolean isLike=false;
                             if (v==1) isLike=true;
                             Date date=new Date(2019,1,1);
-                            currentAns.getVotes().add(new Vote(u,date , isLike));
+                            currentAns.getVotes().add(new Vote(id,u,date , isLike));
                         }
                     }
 
@@ -192,21 +192,51 @@ public class FileTestDataReader
         return  qtree;
     }
 
-    private  User GetUser(int id)
+    public  User GetUser(int id)
     {
         List<User>  list= users.stream().filter(u->u.getId()==id).collect(Collectors.toList());
         return list.get(0);
     }
-    private  Tag GetTag(int id)
+    public  Tag GetTag(int id)
     {
         List<Tag>  list= tags.stream().filter(u->u.getId()==id).collect(Collectors.toList());
         return list.get(0);
     }
 
 
-    private  Question GetQuestion(int id)
+    public Question GetQuestion(int id)
     {
         List<Question>  list= questions.stream().filter(u->u.getId()==id).collect(Collectors.toList());
+        return list.get(0);
+    }
+
+
+    public Answer GetAnswer(int id)
+    {
+        List<Answer>  list= questions.stream()
+                .flatMap(x->x.getAnswers().stream())
+                .filter(u->u.getId()==id)
+                .collect(Collectors.toList());
+        return list.get(0);
+    }
+
+    public Comment GetComment(int id)
+    {
+        List<Comment>  list= questions.stream()
+                .flatMap(x->x.getAnswers().stream())
+                .flatMap(x->x.getComments().stream())
+                .filter(u->u.getId()==id)
+                .collect(Collectors.toList());
+        return list.get(0);
+    }
+
+    public Vote GetVote(int id)
+    {
+        List<Vote>  list= questions.stream()
+                .flatMap(x->x.getAnswers().stream())
+                .flatMap(x->x.getVotes().stream())
+                .filter(u->u.getId()==id)
+                .collect(Collectors.toList());
         return list.get(0);
     }
 }
