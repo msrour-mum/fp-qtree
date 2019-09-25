@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 public class TopComments {
 
-    private static Function<Question,Long> countComments=(q)->q.getAnswers().stream()
+    private   Function<Question,Long> countComments=(q)->q.getAnswers().stream()
             .flatMap(ans->ans.getComments().stream()).count();
 
  public   Function<List<Question>, Optional<Question>> TopCommentedQuestion=

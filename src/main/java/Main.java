@@ -3,6 +3,10 @@ import App.FileTestDataReader;
 import App.Qtree;
 import App.UserStatistics;
 import model.*;
+import model.Question;
+import model.QuestionTag;
+import model.Tag;
+import model.User;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -11,6 +15,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -29,7 +38,7 @@ public class Main {
         System.out.println();
         System.out.println(" please choose the number ");
         System.out.println();
-        System.out.print("1-top active user\n2-top Reputed user \n3-most answering user \n4-top user has question "+
+        System.out.print("1-top active user\n2-top Reputated user \n3-most answering user \n4-top user has question "+
                 "\n5-calculate reputation by answers \n6-calculate reputation by ques&answers \n7-top commented Answer "+
                 "\n8-top commented questions \n9- num of Question by tag &date \n10- top k viewed question \n11- tag analysis "+
                 "\n12- trending k tag \n13- top Fake answer \n14- top active user \n15- top rated answers \n16- top user comments ");
@@ -44,15 +53,22 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         switch (quetionNum){
             case 1 :{
-                System.out.println("method 1");
+                System.out.println("Function: top active user");
+                UserStatistics st=new UserStatistics();
+                System.out.println(st.topActiveUser.apply(qtree));
+               // System.out.println(st.);
                 break;
             }
             case 2: {
-                System.out.println("method 2");
+                System.out.println("Function: top Reputated user");
+                UserStatistics st=new UserStatistics();
+                System.out.println(st.topReputatedUser.apply(qtree));
                 break;
             }
             case 3: {
-                System.out.println("method 3");
+                System.out.println("Function: most answering user");
+                UserStatistics st=new UserStatistics();
+                System.out.println(st.mostAnsweringUser.apply(qtree));
                 break;
             }
             case 4: {
