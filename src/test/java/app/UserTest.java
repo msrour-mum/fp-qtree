@@ -3,6 +3,8 @@ package app;
 import App.FileTestDataReader;
 import App.Qtree;
 import App.UserStatistics;
+import model.Answer;
+import model.Question;
 import model.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -68,11 +70,18 @@ public class UserTest {
     }
 
 
-
-
     @Test
     public void testMostAnsweringUser(){
+        List<Question> questions = qtree.getQuestions();
+        String expected = questions.stream().
+                flatMap(question -> question.getAnswers().stream())
+                .collect(Collectors.groupingBy(Answer::getUser)).entrySet().stream()
+                .max((map1, map2) -> map2.getValue().size() - map1.getValue().size())
+                .map(map -> map.getKey()).get().getName();
 
+        String actual = userStatistics.mostAnsweringUser.apply(qtree);
+
+        Assert.assertEquals("most Answering user", expected,actual);
     }
 
     @Test
