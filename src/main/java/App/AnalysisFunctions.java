@@ -32,6 +32,7 @@ public class AnalysisFunctions {
                         .map(tagListEntry -> (Tag) tagListEntry.getKey())
                         .limit(n)
                         .map(tag -> tag.getName())
+                        .sorted()
                         .collect(Collectors.toList());
         result = getKTrendingTags.apply(questions, from, to, K);
         return result;
