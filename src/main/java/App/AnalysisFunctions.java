@@ -10,12 +10,13 @@ import java.util.stream.Collectors;
 
 
 public class AnalysisFunctions {
-    public List<Question> getKViewedQuestions(List<Question> questions, Integer k) {
-        List<Question> result = null;
-        BiFunction<List<Question>, Integer, List<Question>> getKViewedQuest =
+    public List<String> getKViewedQuestions(List<Question> questions, Integer k) {
+        List<String> result = null;
+        BiFunction<List<Question>, Integer, List<String>> getKViewedQuest =
                 (q, n) -> q.stream()
                         .sorted((q1, q2) -> q2.getViews().size() - q1.getViews().size())
                         .limit(n)
+                        .map(question -> question.getText())
                         .collect(Collectors.toList());
         result = getKViewedQuest.apply(questions, k);
         return result;

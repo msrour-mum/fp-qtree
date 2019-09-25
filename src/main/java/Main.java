@@ -150,11 +150,11 @@ public class Main {
 
                 List<Question> input= qtree.getQuestions();
                 AnalysisFunctions analysisFunctions=new AnalysisFunctions();
-                List<Question> result= analysisFunctions.getKViewedQuestions(input,k);
+                List<String> result= analysisFunctions.getKViewedQuestions(input,k);
                 System.out.println("Function Result");
                 //System.out.println("Top viewed questions: "+result);
-                for (Question q:result
-                     ) {System.out.println("Question: "+q.getText());
+                for (String q:result
+                     ) {System.out.println("Question: "+q);
                 }
                 break;
             }

@@ -31,12 +31,12 @@ class AnalysisFunctionsTest {
     @Test
     void getKViewedQuestionsTest() throws IOException {
         List<Question> input= data.getQuestions();
-        List<Question> output=analysisFunctions.getKViewedQuestions(input,3);
+        List<String> output=analysisFunctions.getKViewedQuestions(input,3);
 
-        List<Question> expectedResult= new ArrayList<>();
-        expectedResult.add(reader.GetQuestion(56));
-        expectedResult.add(reader.GetQuestion(22));
-        expectedResult.add(reader.GetQuestion(68));
+        List<String> expectedResult= new ArrayList<>();
+        expectedResult.add("Obtain column data from One-To-Many join relation in Spring data JPA");
+        expectedResult.add("What is Generics?");
+        expectedResult.add("How to clear a canvas in netbeans?");
 
         Assert.assertEquals(expectedResult,output);
     }
