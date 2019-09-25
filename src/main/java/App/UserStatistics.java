@@ -126,14 +126,6 @@ public class UserStatistics {
             sorted((user1,user2)->(int) (totalUserReputation.apply(q,user2) -totalUserReputation.apply(q,user1))).limit(k)
             .collect(Collectors.toList());
 
-
-
-
-
-
-
-
-
     //top user comments
     public BiFunction<Qtree,Integer, List<User>> topUserComments = (q,k)->q.getQuestions().stream()
             .flatMap(a->a.getAnswers().stream())
@@ -166,33 +158,4 @@ public class UserStatistics {
             .flatMap(a->a.getVotes().stream())
             .collect(Collectors.groupingBy(Vote::isLike),Collectors.summingInt(Vote::isLike))
      */
-
-
-
-    //Zain :Top Active Users [Date]
-    private Function<Qtree,Map<User,Long>> subTopUserQuestion=q->q.getQuestions().stream()
-            .collect(Collectors.groupingBy(Question::getUser,Collectors.counting()))
-            .entrySet()
-            .stream()
-            .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
-            .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
-
-    private Function<Qtree,Map<User,Long>> subTopUserAnswers=q->q.getQuestions().stream()
-            .flatMap(a->a.getAnswers().stream())
-            .collect(Collectors.groupingBy(Answer::getUser,Collectors.counting()))
-            .entrySet()
-            .stream()
-            .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
-            .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
-
-    private Function<Qtree,Map<User,Long>> subTopUserComments=q->q.getQuestions().stream()
-            .flatMap(a->a.getAnswers().stream())
-            .flatMap(a->a.getComments().stream())
-            .collect(Collectors.groupingBy(Comment::getUser,Collectors.counting()))
-            .entrySet()
-            .stream()
-            .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
-            .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
-
-
 }

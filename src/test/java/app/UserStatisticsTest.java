@@ -1,6 +1,5 @@
 package app;
 
-//import App.AnalysisFunctions;
 import App.FileTestDataReader;
 import App.Qtree;
 import App.UserStatistics;
@@ -9,20 +8,19 @@ import model.Question;
 import model.User;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class UserStatisticsTest {
-
+public class UserStatisticsTest {
     FileTestDataReader reader = null;
     Qtree qtree = null;
 
-@Before
+    @Before
     public void setup() throws IOException {
         FileTestDataReader reader = new FileTestDataReader();
         Qtree qtree = reader.Read();
@@ -30,7 +28,7 @@ class UserStatisticsTest {
 
 
     @Test
-    void topUserCommentsTest() throws IOException {
+   public void topUserCommentsTest() throws IOException {
 
         FileTestDataReader reader = new FileTestDataReader();
         Qtree qtree = reader.Read();
@@ -49,7 +47,7 @@ class UserStatisticsTest {
 
 
     @Test
-    void topRatedAnswersTest() throws IOException {
+   public void topRatedAnswersTest() throws IOException {
 
         FileTestDataReader reader = new FileTestDataReader();
         Qtree qtree = reader.Read();
@@ -67,7 +65,7 @@ class UserStatisticsTest {
     }
 
     @Test
-    void topAnsweredQuestionsTest() throws IOException {
+    public void topAnsweredQuestionsTest() throws IOException {
 
         FileTestDataReader reader = new FileTestDataReader();
         Qtree qtree = reader.Read();
@@ -84,8 +82,4 @@ class UserStatisticsTest {
 
         System.out.println("Function topAnsweredQuestions() testing passed");
     }
-
-
-
-
 }
