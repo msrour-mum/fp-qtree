@@ -23,19 +23,6 @@ public class Question {
 
     private List<QuestionViews> views;
 
-
-
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    private List<Comment> comments;
-
     public List<Answer> getAnswers() {
         return answers;
     }
