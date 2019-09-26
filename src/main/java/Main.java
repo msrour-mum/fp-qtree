@@ -51,9 +51,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         switch (quetionNum){
             case 1 :{
-                System.out.println("Function: top active user");
+                System.out.println("Function: top active K users");
+                System.out.println("please enter number of needed active user");
+                int k = sc.nextInt();
+
                 UserStatistics st=new UserStatistics();
-                System.out.println(st.topActiveUser.apply(qtree));
+                System.out.println(st.topActiveKUser.apply(qtree,k));
                // System.out.println(st.);
                 break;
             }
