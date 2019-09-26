@@ -105,7 +105,7 @@ public class Main {
                 TopComments Tc=new TopComments();
                 Optional<Answer> topComAnswer=Tc.topCommentedAnswer.apply(qtree.getQuestions());
                 System.out.println("Function Result");
-                System.out.println("Top Commented Answer: "+topComAnswer.get().getText());
+                System.out.println("Top Commented Answer: "+topComAnswer.get().getId()+" "+topComAnswer.get().getText());
                 break;
             }
             case 8: {
@@ -114,7 +114,7 @@ public class Main {
                 TopComments Tc=new TopComments();
                 Optional<Question> topComQuestion=Tc.TopCommentedQuestion.apply(qtree.getQuestions());
                 System.out.println("Function Result");
-                System.out.println("Top Commented Question: "+topComQuestion.get().getText());
+                System.out.println("Top Commented Question: "+topComQuestion.get().getId()+" "+topComQuestion.get().getText());
                 break;
             }
             case 9: {
@@ -122,22 +122,33 @@ public class Main {
                 System.out.println("Function : Num of Question by tag & date");
                 System.out.println("Enter tag ");
                 String t= sc.nextLine();
-                Tag tag=reader.GetTag(t);
+               // Tag tag=reader.GetTag(t);
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
                 System.out.println("Enter date and time in the format yyyy-MM-dd");
                 System.out.println("For example, it is now " + format.format(new Date()));
-                Date date = null;
-                while (date == null) {
+                System.out.println("Enter Date From");
+                Date dateFrom = null;
+                Date dateTo = null;
+                while (dateFrom == null) {
                     String line = sc.nextLine();
                     try {
-                        date = format.parse(line);
+                        dateFrom = format.parse(line);
+                    } catch (ParseException e) {
+                        System.out.println("Sorry, that's not valid. Please try again.");
+                    }
+                }
+                System.out.println("Enter Date To");
+                while (dateTo == null) {
+                    String line = sc.nextLine();
+                    try {
+                        dateTo = format.parse(line);
                     } catch (ParseException e) {
                         System.out.println("Sorry, that's not valid. Please try again.");
                     }
                 }
 
                 TopComments Tc=new TopComments();
-                Long count = Tc.getQuestionCountByTagAndDate.apply(qtree.getQuestions(),tag,date);
+                Long count = Tc.getQuestionCountByTagAndDate.apply(qtree.getQuestions(),t,dateFrom,dateTo);
                 System.out.println("Function Result");
                 System.out.println("Count of Question: "+ count);
                 break;
