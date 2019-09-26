@@ -184,7 +184,7 @@ public class FileTestDataReader
                 return null;
             }
 
-            System.out.println(questions);
+            //System.out.println(questions);
         }
 
         Qtree qtree =new Qtree(questions,users,tags);

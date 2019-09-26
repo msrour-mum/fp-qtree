@@ -1,7 +1,9 @@
 package App;
 
+import FuncInterface.FunctionX3;
 import model.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -22,7 +24,7 @@ public class UserStatistics {
     isAnswer has good reputation if it's marked as answered or number of up votes more than number of down votes by 1.6
      */
     private Predicate<Answer> isAnswerHasGoodReputation = (a)->
-            a.isVerified() || (getAnswerUpVotesCount.apply(a)/ (getAnswerDownVotesCount.apply(a) == 0 ? 1 : getAnswerDownVotesCount.apply(a))) > 5;
+            a.isVerified() || (getAnswerUpVotesCount.apply(a)/ (getAnswerDownVotesCount.apply(a) == 0 ? 1 : getAnswerDownVotesCount.apply(a))) > 1.6;
 
     private Predicate<Question> isQuestionHasGoodReputation = (q)->
             q.getAnswers().size() >= 3 || q.getAnswers().stream().anyMatch(Answer::isVerified);
@@ -47,7 +49,6 @@ public class UserStatistics {
     private BiFunction<Qtree,User,List<Answer>> getUserAnswersWithGoodReputation =
             (app, user)->
                     app.getQuestions().stream()
-                            .filter(q -> q.getUser().getId() == user.getId())
                             .flatMap(q-> q.getAnswers().stream())
                             .filter(a -> a.getUser().getId() == user.getId())
                             .filter(a-> isAnswerHasGoodReputation.test(a))
@@ -125,6 +126,14 @@ public class UserStatistics {
             sorted((user1,user2)->(int) (totalUserReputation.apply(q,user2) -totalUserReputation.apply(q,user1))).limit(k)
             .collect(Collectors.toList());
 
+
+
+
+
+
+
+
+
     //top user comments
     public BiFunction<Qtree,Integer, List<User>> topUserComments = (q,k)->q.getQuestions().stream()
             .flatMap(a->a.getAnswers().stream())
@@ -143,6 +152,14 @@ public class UserStatistics {
             .sorted((a1,a2)->a2.getVotes().size()-a1.getVotes().size())
             .limit(k)
             .collect(Collectors.toList());
+
+
+    //Zain :top answered Questions
+    public BiFunction<Qtree,Integer,List<Question>> topAnsweredQuestions = (q,k)->q.getQuestions().stream()
+            .sorted((a1,a2)->a2.getAnswers().size()-a1.getAnswers().size())
+            .limit(k)
+            .collect(Collectors.toList());
+
 
   /*  BiFunction<Qtree,Integer,List<Answer>> topRatedAnswers = (q,k)->q.getQuestions().stream()
             .flatMap(a->a.getAnswers().stream())
@@ -176,4 +193,6 @@ public class UserStatistics {
             .stream()
             .sorted((a1,a2)->a2.getValue().intValue()-a1.getValue().intValue())
             .collect(Collectors.toMap(x->x.getKey(),x->x.getValue()));
+
+
 }

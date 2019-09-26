@@ -3,6 +3,8 @@ package app;
 import App.FileTestDataReader;
 import App.Qtree;
 import App.UserStatistics;
+import model.Answer;
+import model.Question;
 import model.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,7 +33,6 @@ public class UserTest {
     public void testGetTopKUsersHaveQuestions(){
 
         List<User> users = userStatistics.getTopKUsersHaveQuestions.apply(qtree,1);
-        System.out.println("testGetTopKUsersHaveQuestions");
         System.out.println(users);
 
         Assert.assertEquals("Number of users", 1, users.size());
@@ -45,7 +46,6 @@ public class UserTest {
         List<User> users = userStatistics.getTopKUsersHaveQuestions.apply(qtree,2);
 
         Assert.assertEquals("Number of users", 2, users.size());
-        System.out.println("testGetTopKUsersHaveQuestions2");
         System.out.println(users);
         Assert.assertEquals("User that has more questions_2:", 8, users.get(0).getId());
         System.out.println("Tested");
@@ -55,11 +55,9 @@ public class UserTest {
     public void testGetTopKUsersReputationBasedOnAnswersVotes(){
 
         List<User> users = userStatistics.getTopKUsersReputationBasedOnAnswersVotes.apply(qtree,3);
-
-        System.out.println("testGetTopKUsersReputationBasedOnAnswersVotes");
         System.out.println(users);
         Assert.assertEquals("Number of users", 3, users.size());
-        Assert.assertEquals("User that has more questions:", 2, users.get(1).getId());
+        Assert.assertEquals("User that has best reputation based on his answers votes:", 10, users.get(0).getId());
         System.out.println("Tested");
     }
 
@@ -68,7 +66,6 @@ public class UserTest {
 
         List<User> users = userStatistics.getTopKUsersReputationBasedOnQuestionAndAnswers.apply(qtree,3);
 
-        System.out.println("testGetTopKUsersReputationBasedOnQuestionAndAnswers");
         System.out.println(users);
         Assert.assertEquals("Number of users", 3, users.size());
         Assert.assertEquals("User that has more questions:", 8, users.get(0).getId());
@@ -76,11 +73,18 @@ public class UserTest {
     }
 
 
-
-
     @Test
     public void testMostAnsweringUser(){
+        List<Question> questions = qtree.getQuestions();
+        String expected = questions.stream().
+                flatMap(question -> question.getAnswers().stream())
+                .collect(Collectors.groupingBy(Answer::getUser)).entrySet().stream()
+                .max((map1, map2) -> map2.getValue().size() - map1.getValue().size())
+                .map(map -> map.getKey()).get().getName();
 
+        String actual = userStatistics.mostAnsweringUser.apply(qtree);
+
+        Assert.assertEquals("most Answering user", expected,actual);
     }
 
     @Test
